@@ -32,6 +32,45 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# local secrets & keys
+*.key
+*.crt
+*.cert
+*.pfx
+*.p12
+*.der
+*.jks
+*.keystore
+*.mobileprovision
+*.provisionprofile
+google-services.json
+GoogleService-Info.plist
+firebase-debug.log
+serviceAccount*.json
+*.credentials.json
+*.secrets.json
+*.envrc
+.direnv
+
+# tool auth caches
+.npmrc
+.yarnrc*
+.netrc
+~/.aws/
+~/.azure/
+~/.config/gcloud/
+~/.kube/
+
+# OS/editor caches
+.idea/
+.vscode/*
+!.vscode/extensions.json
 
 # vercel
 .vercel
@@ -39,3 +78,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#firebase
+
+# project firebase config files (keep out of git)
+src/lib/firebase.ts
+src/lib/firebase*.ts
