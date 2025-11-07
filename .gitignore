@@ -1,6 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# dependencies
+# ============================================
+# Dependencies
+# ============================================
 /node_modules
 /.pnp
 .pnp.*
@@ -9,39 +11,68 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.pnp.js
 
-# testing
-/coverage
-
-# next.js
+# ============================================
+# Next.js
+# ============================================
 /.next/
 /out/
+next-env.d.ts
+.next
+.next/
+out/
 
-# production
+# ============================================
+# Production / Build
+# ============================================
 /build
+/dist
+*.tsbuildinfo
+*.tsbuildinfo.*
 
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files (can opt-in for committing if needed)
-.env*
+# ============================================
+# Environment Variables
+# ============================================
+.env
 .env.*
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
+.env*.local
 
-# local secrets & keys
+# ============================================
+# Testing
+# ============================================
+/coverage
+/.nyc_output
+*.lcov
+.jest/
+.nyc_output/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# ============================================
+# Debug & Logs
+# ============================================
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+lerna-debug.log*
+*.log
+logs/
+*.log.*
+
+# ============================================
+# Secrets & Keys
+# ============================================
 *.key
 *.crt
 *.cert
+*.pem
 *.pfx
 *.p12
 *.der
@@ -49,38 +80,193 @@ yarn-error.log*
 *.keystore
 *.mobileprovision
 *.provisionprofile
+*.credentials.json
+*.secrets.json
+serviceAccount*.json
+*-credentials.json
+*-secrets.json
+
+# ============================================
+# Firebase
+# ============================================
 google-services.json
 GoogleService-Info.plist
 firebase-debug.log
-serviceAccount*.json
-*.credentials.json
-*.secrets.json
-*.envrc
-.direnv
+firebase-debug.*.log
+.firebase/
+.firebaserc
+firebase.json
+.firebase/
+src/lib/firebase.ts
+src/lib/firebase*.ts
 
-# tool auth caches
-.npmrc
-.yarnrc*
-.netrc
+# ============================================
+# Cloud Provider Credentials
+# ============================================
+.aws/
+.azure/
+.config/gcloud/
+.kube/
+.aws/
+.azure/
+.gcloud/
 ~/.aws/
 ~/.azure/
 ~/.config/gcloud/
 ~/.kube/
 
-# OS/editor caches
-.idea/
+# ============================================
+# Tool Configuration (with secrets)
+# ============================================
+.npmrc
+.yarnrc*
+.netrc
+.editorconfig
+.envrc
+.direnv
+*.envrc
+
+# ============================================
+# IDE & Editor Files
+# ============================================
+# VSCode
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/*.code-snippets
 
-# vercel
+# IntelliJ / WebStorm
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Vim
+*.swp
+*.swo
+*~
+.vim/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# OS Files
+# ============================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ============================================
+# Deployment & Hosting
+# ============================================
+# Vercel
 .vercel
+.vercel/
 
-# typescript
+# Netlify
+.netlify/
+.netlify.toml
+
+# AWS Amplify
+amplify/
+amplify-build-config.json
+amplify.yml
+
+# Serverless
+.serverless/
+.serverless-nextjs/
+
+# ============================================
+# TypeScript
+# ============================================
 *.tsbuildinfo
 next-env.d.ts
 
-#firebase
+# ============================================
+# Turbo
+# ============================================
+.turbo/
+.turbo
 
-# project firebase config files (keep out of git)
-src/lib/firebase.ts
-src/lib/firebase*.ts
+# ============================================
+# Temporary Files
+# ============================================
+*.tmp
+*.temp
+*.bak
+*.backup
+*.swp
+*.swo
+*~
+.cache/
+.temp/
+tmp/
+temp/
+
+# ============================================
+# Package Manager Locks (optional - uncomment if you want to ignore)
+# ============================================
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# ============================================
+# Storybook
+# ============================================
+storybook-static/
+.out/
+
+# ============================================
+# Documentation (optional - project-specific)
+# ============================================
+SEO_SETUP.md
+
+# ============================================
+# Misc
+# ============================================
+*.pem
+.vercel
+.turbo
+*.local

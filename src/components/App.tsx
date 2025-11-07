@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { jwtDecode } from 'jwt-decode';
 import Login from './Login';
 import UploadFile from './UploadFile';
@@ -14,32 +15,25 @@ import Footer from './Footer';
 import { DecodedToken } from '../types';
 
 const App: React.FC = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   const [token, setToken] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string>('Guest');
   const [fileListUpdate, setFileListUpdate] = useState<boolean>(false);
-  // Get current page from URL
-  const getCurrentPage = () => {
-    if (typeof window !== 'undefined') {
-      const path = window.location.pathname;
-      return path === '/' ? 'home' : path.substring(1);
-    }
-    return 'home';
+  
+  // Get current page from pathname (SSR-safe)
+  const getCurrentPage = (path: string | null) => {
+    const p = path || '/';
+    return p === '/' ? 'home' : p.substring(1);
   };
+  
+  const [currentPage, setCurrentPage] = useState<string>(() => getCurrentPage(pathname));
 
-  const [currentPage, setCurrentPage] = useState<string>(getCurrentPage());
-  // Removed loading state for instant navigation
-
-  // Listen for browser back/forward buttons
+  // Update page when pathname changes (e.g., browser back/forward)
   useEffect(() => {
-    const handlePopState = () => {
-      const path = window.location.pathname;
-      const page = path === '/' ? 'home' : path.substring(1);
-      setCurrentPage(page);
-    };
-
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+    const page = getCurrentPage(pathname);
+    setCurrentPage(page);
+  }, [pathname]);
 
   useEffect(() => {
     const storedToken = localStorage.getItem('authToken');
@@ -83,9 +77,9 @@ const App: React.FC = () => {
 
   const handleNavigation = (page: string) => {
     setCurrentPage(page);
-    // Update URL without page reload
+    // Update URL using Next.js router
     const url = page === 'home' ? '/' : `/${page}`;
-    window.history.pushState({}, '', url);
+    router.push(url);
   };
 
   const renderCurrentPage = () => {
