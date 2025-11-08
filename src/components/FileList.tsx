@@ -113,7 +113,7 @@ const FileList: React.FC<FileListProps> = ({ userRole }) => {
             <button
               key={key}
               onClick={() => { setSelectedCategory(key); setSelectedFiles({}); setAllSelected(false); }}
-              className={`px-3 py-2 text-sm font-semibold rounded w-full border ${selectedCategory === key ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}`}
+              className={`px-3 py-2 text-sm font-semibold cursor-pointer rounded w-full border ${selectedCategory === key ? 'bg-blue-600 text-white border-blue-600' : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-50'}`}
             >
               {label}
             </button>
@@ -124,11 +124,11 @@ const FileList: React.FC<FileListProps> = ({ userRole }) => {
       <div className="rounded-xl bg-white ring-1 ring-gray-200 p-4 md:p-6">
         <div className="flex flex-col md:flex-row justify-between mb-4 gap-2">
           <div className="flex items-center gap-2">
-            <button onClick={handleSelectAllFiles} className="inline-flex items-center gap-2 border border-gray-300 bg-white hover:bg-gray-50 text-gray-800 py-2 px-3 rounded">
+            <button onClick={handleSelectAllFiles} className="inline-flex cursor-pointer items-center gap-2 border border-gray-300 bg-white hover:bg-gray-50 text-gray-800 py-2 px-3 rounded">
               <span className="inline-block h-2 w-2 rounded-full bg-blue-600" />
               {allSelected ? 'Deselect All' : 'Select All'}
             </button>
-            <button onClick={handleDownloadSelectedFiles} className="inline-flex items-center gap-2 border border-gray-300 bg-white hover:bg-gray-50 text-gray-800 py-2 px-3 rounded">
+            <button onClick={handleDownloadSelectedFiles} className="inline-flex cursor-pointer items-center gap-2 border border-gray-300 bg-white hover:bg-gray-50 text-gray-800 py-2 px-3 rounded">
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg>
               Download Selected
             </button>
@@ -142,7 +142,7 @@ const FileList: React.FC<FileListProps> = ({ userRole }) => {
             {filteredFiles.map(file => (
               <li key={file.id} className="py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
                 <div className="flex items-center gap-2 min-w-0">
-                  <input type="checkbox" checked={selectedFiles[file.id] || false} onChange={() => handleSelectFile(file.id)} className="h-4 w-4" />
+                  <input type="checkbox" checked={selectedFiles[file.id] || false} onChange={() => handleSelectFile(file.id)} className="h-4 w-4 cursor-pointer" />
                   <a href={file.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline truncate">
                     {file.name}
                   </a>
@@ -150,12 +150,12 @@ const FileList: React.FC<FileListProps> = ({ userRole }) => {
                 </div>
                 {userRole === 'manager' && (
                   <div className="flex items-center gap-2">
-                    <select onChange={(e) => handleEditFileCategory(file.id, e.target.value)} value={file.category} className="py-1 px-2 border border-gray-300 rounded text-black">
+                    <select onChange={(e) => handleEditFileCategory(file.id, e.target.value)} value={file.category} className="py-1 px-2 border border-gray-300 rounded text-black cursor-pointer">
                       {categories.map(({ key, label }) => (
                         <option key={key} value={key}>{label}</option>
                       ))}
                     </select>
-                    <button onClick={() => handleDeleteFile(file.id, file.name)} className="inline-flex items-center gap-1 bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded">
+                    <button onClick={() => handleDeleteFile(file.id, file.name)} className="inline-flex items-center gap-1 bg-red-600 cursor-pointer hover:bg-red-700 text-white py-1 px-3 rounded">
                       <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 6h18"/><path d="M8 6v14"/><path d="M16 6v14"/><path d="M5 6l1-3h12l1 3"/></svg>
                       Delete
                     </button>

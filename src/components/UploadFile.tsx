@@ -75,7 +75,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ token, role, onFileUpload }) =>
               className="block w-full text-sm text-gray-700 
                 file:mr-3 file:py-2 file:px-4 file:rounded-md 
                 file:border file:border-gray-300 file:text-sm file:font-semibold 
-                file:bg-white file:text-gray-800 hover:file:bg-gray-50 
+                file:cursor-pointer file:bg-white file:text-gray-800 hover:file:bg-gray-50 
                 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -85,7 +85,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ token, role, onFileUpload }) =>
             <select
               value={category}
               onChange={handleCategoryChange}
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+              className="w-full border border-gray-300 cursor-pointer rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
             >
               <option value="notices">Notices for Meetings</option>
               <option value="minutes">Meeting Minutes</option>
@@ -99,7 +99,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ token, role, onFileUpload }) =>
             <button 
               onClick={handleUpload} 
               disabled={uploading} 
-              className="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white 
+              className="inline-flex cursor-pointer items-center gap-2 bg-gray-900 hover:bg-black text-white 
                 font-semibold py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
             >
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 3v12"/><path d="m7 12 5 5 5-5"/><path d="M5 21h14"/></svg>

@@ -84,28 +84,28 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, currentPage, onSignOut, onNav
           </div>
           <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex-shrink-0">
-              <button onClick={() => handleNavigation('home')} className="text-gray-900 text-xl sm:text-2xl font-extrabold tracking-tight">Pelican Point East</button>
+              <button onClick={() => handleNavigation('home')} className="text-gray-900 text-xl sm:text-2xl font-extrabold tracking-tight cursor-pointer">Pelican Point East</button>
             </div>
             <div className="hidden sm:block sm:ml-auto">
               <div className="flex items-center gap-1">
-                <button onClick={() => handleNavigation('home')} className={`px-3 py-2 rounded-md text-sm font-medium ${currentPage==='home' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Home</button>
+                <button onClick={() => handleNavigation('home')} className={`px-3 py-2 rounded-md text-sm font-medium ${currentPage==='home' ? 'text-gray-900 bg-gray-100 cursor-pointer' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Home</button>
                 {userRole !== 'Guest' && (
-                  <button onClick={() => handleNavigation('owners-area')} className={`px-3 py-2 rounded-md text-sm font-medium ${currentPage==='owners-area' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Owners' Area</button>
+                  <button onClick={() => handleNavigation('owners-area')} className={`px-3 py-2 cursor-pointer rounded-md text-sm font-medium ${currentPage==='owners-area' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Owners' Area</button>
                 )}
                 {userRole === 'manager' && (
                   <>
-                    <button onClick={() => handleNavigation('upload')} className={`px-3 py-2 rounded-md text-sm font-medium ${currentPage==='upload' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Upload File</button>
-                    <button onClick={() => handleNavigation('resident-directory')} className={`px-3 py-2 rounded-md text-sm font-medium ${currentPage==='resident-directory' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>User List</button>
-                    <button onClick={() => handleNavigation('add-user')} className={`px-3 py-2 rounded-md text-sm font-medium ${currentPage==='add-user' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Add User</button>
+                    <button onClick={() => handleNavigation('upload')} className={`px-3 py-2 rounded-md text-sm cursor-pointer font-medium ${currentPage==='upload' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Upload File</button>
+                    <button onClick={() => handleNavigation('resident-directory')} className={`px-3 py-2 rounded-md text-sm cursor-pointer font-medium ${currentPage==='resident-directory' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>User List</button>
+                    <button onClick={() => handleNavigation('add-user')} className={`px-3 py-2 rounded-md text-sm cursor-pointer font-medium ${currentPage==='add-user' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Add User</button>
                   </>
                 )}
-                <button onClick={() => handleNavigation('contact')} className={`px-3 py-2 rounded-md text-sm font-medium ${currentPage==='contact' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Contact Us</button>
+                <button onClick={() => handleNavigation('contact')} className={`px-3 py-2 rounded-md text-sm cursor-pointer font-medium ${currentPage==='contact' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Contact Us</button>
                 {userRole === 'Guest' ? (
-                  <button onClick={() => handleNavigation('login')} className="ml-2 inline-flex items-center px-3 py-2 rounded-md text-sm font-semibold text-white bg-gray-900 hover:bg-black">Login</button>
+                  <button onClick={() => handleNavigation('login')} className="ml-2 inline-flex items-center px-3 py-2 rounded-md text-sm cursor-pointer font-semibold text-white bg-gray-900 hover:bg-black">Login</button>
                 ) : (
                   <button
                     onClick={handleSignOut}
-                    className="ml-2 inline-flex items-center px-3 py-2 rounded-md text-sm font-semibold text-white bg-gray-900 hover:bg-black"
+                    className="ml-2 inline-flex items-center px-3 py-2 rounded-md text-sm cursor-pointer font-semibold text-white bg-gray-900 hover:bg-black"
                   >
                     Sign Out
                   </button>
@@ -122,24 +122,24 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, currentPage, onSignOut, onNav
         ref={mobileMenuRef}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 bg-white/90 backdrop-blur border-t border-gray-200">
-          <button onClick={() => handleNavigation('home')} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Home</button>
+          <button onClick={() => handleNavigation('home')} className="block cursor-pointer w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Home</button>
           {userRole !== 'Guest' && (
-            <button onClick={() => handleNavigation('owners-area')} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Owners' Area</button>
+            <button onClick={() => handleNavigation('owners-area')} className="block cursor-pointer w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Owners' Area</button>
           )}
           {userRole === 'manager' && (
             <>
-              <button onClick={() => handleNavigation('upload')} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Upload File</button>
-              <button onClick={() => handleNavigation('resident-directory')} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">User List</button>
-              <button onClick={() => handleNavigation('add-user')} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Add User</button>
+              <button onClick={() => handleNavigation('upload')} className="block w-full cursor-pointer text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Upload File</button>
+              <button onClick={() => handleNavigation('resident-directory')} className="block w-full cursor-pointer text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">User List</button>
+              <button onClick={() => handleNavigation('add-user')} className="block w-full cursor-pointer text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Add User</button>
             </>
           )}
-          <button onClick={() => handleNavigation('contact')} className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Contact Us</button>
+          <button onClick={() => handleNavigation('contact')} className="block w-full cursor-pointer text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Contact Us</button>
           {userRole === 'Guest' ? (
-            <button onClick={() => handleNavigation('login')} className="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-white bg-gray-900 hover:bg-black">Login</button>
+            <button onClick={() => handleNavigation('login')} className="block w-full text-left px-3 cursor-pointer py-2 rounded-md text-base font-semibold text-white bg-gray-900 hover:bg-black">Login</button>
           ) : (
             <button
               onClick={handleSignOut}
-              className="block w-full text-left px-3 py-2 rounded-md text-base font-semibold text-white bg-gray-900 hover:bg-black"
+              className="block w-full text-left px-3 cursor-pointer py-2 rounded-md text-base font-semibold text-white bg-gray-900 hover:bg-black"
             >
               Sign Out
             </button>

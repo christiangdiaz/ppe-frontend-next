@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                 Pelican Point East
               </h1>
-              <p className="max-w-3xl mx-auto text-lg sm:text-xl md:text-2xl lg:text-3xl text-white/95 mb-8 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-light">
+              <p className="max-w-3xl mx-auto text-lg sm:text-xl md:text-1xl lg:text-2xl text-white-900 mb-8 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-bold">
                 Waterfront living on Venetian Bay in Park Shore. Walk to The Village Shops, enjoy radiant sunsets, and private beach access via the Park Shore Association.
               </p>
               <div className="flex flex-wrap justify-center gap-4 mt-10">
@@ -57,8 +57,8 @@ const HomePage: React.FC = () => {
       <section className="max-w-6xl mx-auto px-6 py-10">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Amenities</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-3">Amenities</h2>
+            <div className="grid grid-cols-2 sm:grid-cols-2 gap-5">
               {["Boat slips","Covered parking","Secure entry","Walk to Venetian Village","Kayak access","Landscaped grounds"].map((item, i) => (
                 <div key={i} className="flex items-start gap-2 rounded-lg bg-white p-3 ring-1 ring-gray-200">
                   <span className="inline-block h-2 w-2 rounded-full bg-blue-600 mt-2" />
@@ -74,6 +74,7 @@ const HomePage: React.FC = () => {
       </section>
 
       <section className="max-w-6xl mx-auto px-6 py-12">
+      <h2 className="text-3xl font-bold text-gray-900 text-center mb-3">Gallery</h2>
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 [column-fill:_balance]"><div className="hidden"></div>
           {[
             { src: '/Paint1.jpg', alt: 'Pelican Point East Condominium Building Exterior' },

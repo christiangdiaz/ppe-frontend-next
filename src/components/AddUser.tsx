@@ -91,7 +91,7 @@ const AddUser: React.FC<AddUserProps> = ({ token, role, onAdd, onLogout }) => {
                 value={roleInput}
                 onChange={(e) => setRoleInput(e.target.value as 'user' | 'manager')}
                 required
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
+                className="w-full px-4 py-2 border border-gray-300 cursor-pointer rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
               >
                 <option value="user">User</option>
                 <option value="manager">Manager</option>
@@ -101,7 +101,7 @@ const AddUser: React.FC<AddUserProps> = ({ token, role, onAdd, onLogout }) => {
             <div className="flex items-center gap-3">
               <button
                 type="submit"
-                className="inline-flex items-center gap-2 bg-gray-900 hover:bg-black text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
+                className="inline-flex cursor-pointer items-center gap-2 bg-gray-900 hover:bg-black text-white py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500"
               >
                 <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
                 Add User

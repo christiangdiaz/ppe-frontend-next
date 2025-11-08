@@ -33,7 +33,6 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
   return (
     <div className="relative overflow-hidden h-screen w-full">
-      {/* Background Image - Matched to HomePage for seamless transition */}
       <div className="absolute inset-0">
         <Image
           src="/DroneDay.jpg"
@@ -45,10 +44,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           quality={90}
         />
         
-        {/* Dark Overlay - Slightly darker for login form readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
         
-        {/* Subtle vignette - Matched to HomePage */}
         <div 
           className="absolute inset-0" 
           style={{ 
@@ -57,10 +54,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
         />
       </div>
 
-      {/* Login Form Container */}
+
       <div className="relative z-10 h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
         <div className="w-full max-w-md">
-          {/* Login Card */}
+
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 sm:p-10 border border-white/20">
             <div className="mb-8 text-center">
               <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-2">
@@ -104,8 +101,9 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
                   <button
                     type="button"
                     onClick={handleTogglePassword}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none transition-colors"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 cursor-pointer focus:outline-none transition-colors"
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
+
                   >
                     {showPassword ? (
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,7 +127,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
               <button
                 type="submit"
-                className="w-full bg-gray-900 hover:bg-black text-white py-3 px-6 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 shadow-lg hover:shadow-xl"
+                className="w-full bg-gray-900 hover:bg-black cursor-pointer text-white py-3 px-6 rounded-lg font-semibold focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-all duration-200 shadow-lg hover:shadow-xl"
               >
                 Sign In
               </button>
