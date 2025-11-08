@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
           <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-3">Amenities</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {["Boat slips","Covered parking","Secure entry","Walk to Ventian Village","Kayak access","Landscaped grounds"].map((item, i) => (
+              {["Boat slips","Covered parking","Secure entry","Walk to Venetian Village","Kayak access","Landscaped grounds"].map((item, i) => (
                 <div key={i} className="flex items-start gap-2 rounded-lg bg-white p-3 ring-1 ring-gray-200">
                   <span className="inline-block h-2 w-2 rounded-full bg-blue-600 mt-2" />
                   <span className="text-lg text-gray-800">{item}</span>
