@@ -19,6 +19,7 @@ const App: React.FC = () => {
   const router = useRouter();
   const [token, setToken] = useState<string | null>(null);
   const [userRole, setUserRole] = useState<string>('Guest');
+  const [username, setUsername] = useState<string | null>(null);
   const [fileListUpdate, setFileListUpdate] = useState<boolean>(false);
   
   // Get current page from pathname (SSR-safe)
@@ -42,6 +43,7 @@ const App: React.FC = () => {
         const decodedToken = jwtDecode<DecodedToken>(storedToken);
         setToken(storedToken);
         setUserRole(decodedToken.role);
+        setUsername(decodedToken.username);
       } catch (error) {
         // Invalid token, clear it
         localStorage.removeItem('authToken');
@@ -55,6 +57,7 @@ const App: React.FC = () => {
       const decodedToken = jwtDecode<DecodedToken>(newToken);
       setToken(newToken);
       setUserRole(decodedToken.role);
+      setUsername(decodedToken.username);
       localStorage.setItem('authToken', newToken);
       localStorage.setItem('userRole', decodedToken.role);
       setCurrentPage('home');
@@ -66,6 +69,7 @@ const App: React.FC = () => {
   const handleSignOut = () => {
     setToken(null);
     setUserRole('Guest');
+    setUsername(null);
     localStorage.removeItem('authToken');
     localStorage.removeItem('userRole');
     setCurrentPage('home');
@@ -123,7 +127,8 @@ const App: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
       <Navbar 
-        userRole={userRole} 
+        userRole={userRole}
+        username={username || undefined}
         currentPage={currentPage} 
         onSignOut={handleSignOut} 
         onNavigate={handleNavigation} 

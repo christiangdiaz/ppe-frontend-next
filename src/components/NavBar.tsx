@@ -1,9 +1,61 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { NavbarProps } from '../types';
+import { db } from '../lib/firebase';
+import { doc, setDoc, onSnapshot, serverTimestamp } from 'firebase/firestore';
 
-const Navbar: React.FC<NavbarProps> = ({ userRole, currentPage, onSignOut, onNavigate }) => {
+const Navbar: React.FC<NavbarProps> = ({ userRole, username, currentPage, onSignOut, onNavigate }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  // Track if resident is currently in residence
+  const [residentInResidence, setResidentInResidence] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  // Load inResidence status from Firestore when component mounts or username changes
+  useEffect(() => {
+    if (!username || userRole === 'Guest') {
+      setLoading(false);
+      return;
+    }
+
+    const userDocRef = doc(db, 'users', username);
+    
+    // Set up real-time listener for inResidence status
+    const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        const data = docSnapshot.data();
+        setResidentInResidence(data.inResidence ?? false);
+      } else {
+        // Document doesn't exist, create it with default value
+        setDoc(userDocRef, { inResidence: false }, { merge: true });
+        setResidentInResidence(false);
+      }
+      setLoading(false);
+    }, (error) => {
+      console.error('Error loading inResidence status:', error);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, [username, userRole]);
+
+  // Handle checkbox change: Save to Firestore with timestamp
+  const handleResidentInResidenceChange = async (checked: boolean) => {
+    if (!username || userRole === 'Guest') return;
+    
+    setResidentInResidence(checked);
+    
+    try {
+      const userDocRef = doc(db, 'users', username);
+      await setDoc(userDocRef, { 
+        inResidence: checked,
+        lastChanged: serverTimestamp()
+      }, { merge: true });
+    } catch (error) {
+      console.error('Error saving inResidence status:', error);
+      // Revert on error
+      setResidentInResidence(!checked);
+    }
+  };
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -88,6 +140,29 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, currentPage, onSignOut, onNav
             </div>
             <div className="hidden sm:block sm:ml-auto">
               <div className="flex items-center gap-1">
+                {userRole !== 'Guest' && !loading && (
+                  <label className={`flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors ${
+                    residentInResidence 
+                      ? 'bg-green-50 hover:bg-green-100' 
+                      : 'bg-red-50 hover:bg-red-100'
+                  }`} title="Toggle to indicate if you are currently in residence">
+                    <input
+                      type="checkbox"
+                      checked={residentInResidence}
+                      onChange={(e) => handleResidentInResidenceChange(e.target.checked)}
+                      className={`w-4 h-4 rounded border-2 focus:ring-2 focus:ring-offset-2 cursor-pointer ${
+                        residentInResidence
+                          ? 'accent-green-600 border-green-400 focus:ring-green-500'
+                          : 'accent-red-600 border-red-400 focus:ring-red-500'
+                      }`}
+                    />
+                    <span className={`text-sm font-medium ${
+                      residentInResidence ? 'text-green-700' : 'text-red-700'
+                    }`}>
+                      {residentInResidence ? 'In Residence' : 'Away'}
+                    </span>
+                  </label>
+                )}
                 <button onClick={() => handleNavigation('home')} className={`px-3 py-2 rounded-md text-sm font-medium ${currentPage==='home' ? 'text-gray-900 bg-gray-100 cursor-pointer' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Home</button>
                 {userRole !== 'Guest' && (
                   <button onClick={() => handleNavigation('owners-area')} className={`px-3 py-2 cursor-pointer rounded-md text-sm font-medium ${currentPage==='owners-area' ? 'text-gray-900 bg-gray-100' : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'}`}>Owners' Area</button>
@@ -122,6 +197,29 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, currentPage, onSignOut, onNav
         ref={mobileMenuRef}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 bg-white/90 backdrop-blur border-t border-gray-200">
+          {userRole !== 'Guest' && !loading && (
+            <label className={`flex items-center gap-2 px-3 py-2 rounded-md cursor-pointer transition-colors ${
+              residentInResidence 
+                ? 'bg-green-50 hover:bg-green-100' 
+                : 'bg-red-50 hover:bg-red-100'
+            }`} title="Toggle to indicate if you are currently in residence">
+              <input
+                type="checkbox"
+                checked={residentInResidence}
+                onChange={(e) => handleResidentInResidenceChange(e.target.checked)}
+                className={`w-4 h-4 rounded border-2 focus:ring-2 focus:ring-offset-2 cursor-pointer ${
+                  residentInResidence
+                    ? 'accent-green-600 border-green-400 focus:ring-green-500'
+                    : 'accent-red-600 border-red-400 focus:ring-red-500'
+                }`}
+              />
+              <span className={`text-base font-medium ${
+                residentInResidence ? 'text-green-700' : 'text-red-700'
+              }`}>
+                {residentInResidence ? 'In Residence' : 'Away'}
+              </span>
+            </label>
+          )}
           <button onClick={() => handleNavigation('home')} className="block cursor-pointer w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Home</button>
           {userRole !== 'Guest' && (
             <button onClick={() => handleNavigation('owners-area')} className="block cursor-pointer w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100">Owners' Area</button>

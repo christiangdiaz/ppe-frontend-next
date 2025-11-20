@@ -4,6 +4,8 @@ export interface User {
     role: 'manager' | 'user';
     createdAt?: Date;
     lastLogin?: Date;
+    inResidence?: boolean;
+    lastChanged?: Date | { seconds: number; nanoseconds: number } | string;
 }
 
 // File types
@@ -55,6 +57,7 @@ export interface FileListProps {
 
 export interface NavbarProps {
     userRole: string;
+    username?: string;
     onSignOut: () => void;
     onNavigate: (page: string) => void;
     currentPage: string;
