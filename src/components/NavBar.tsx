@@ -5,12 +5,10 @@ import { doc, setDoc, onSnapshot, serverTimestamp } from 'firebase/firestore';
 
 const Navbar: React.FC<NavbarProps> = ({ userRole, username, currentPage, onSignOut, onNavigate }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // Track if resident is currently in residence
   const [residentInResidence, setResidentInResidence] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const mobileMenuRef = useRef<HTMLDivElement>(null);
 
-  // Load inResidence status from Firestore when component mounts or username changes
   useEffect(() => {
     if (!username || userRole === 'Guest') {
       setLoading(false);
@@ -19,13 +17,11 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, username, currentPage, onSign
 
     const userDocRef = doc(db, 'users', username);
     
-    // Set up real-time listener for inResidence status
     const unsubscribe = onSnapshot(userDocRef, (docSnapshot) => {
       if (docSnapshot.exists()) {
         const data = docSnapshot.data();
         setResidentInResidence(data.inResidence ?? false);
       } else {
-        // Document doesn't exist, create it with default value
         setDoc(userDocRef, { inResidence: false }, { merge: true });
         setResidentInResidence(false);
       }
@@ -38,7 +34,6 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, username, currentPage, onSign
     return () => unsubscribe();
   }, [username, userRole]);
 
-  // Handle checkbox change: Save to Firestore with timestamp
   const handleResidentInResidenceChange = async (checked: boolean) => {
     if (!username || userRole === 'Guest') return;
     
@@ -52,7 +47,6 @@ const Navbar: React.FC<NavbarProps> = ({ userRole, username, currentPage, onSign
       }, { merge: true });
     } catch (error) {
       console.error('Error saving inResidence status:', error);
-      // Revert on error
       setResidentInResidence(!checked);
     }
   };

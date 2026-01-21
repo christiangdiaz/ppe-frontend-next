@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-[0_4px_12px_rgba(0,0,0,0.8)]">
                 Pelican Point East
               </h1>
-              <p className="max-w-3xl mx-auto text-lg sm:text-xl md:text-1xl lg:text-2xl text-white-900 mb-8 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-bold">
+              <p className="max-w-3xl mx-auto text-lg sm:text-xl md:text-1xl lg:text-2xl text-white mb-8 leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-bold">
                 Waterfront living on Venetian Bay in Park Shore. Walk to The Village Shops, enjoy radiant sunsets, and private beach access via the Park Shore Association.
               </p>
               <div className="flex flex-wrap justify-center gap-4 mt-10">
