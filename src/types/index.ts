@@ -10,10 +10,12 @@ export interface User {
 
 // File types
 export interface FileItem {
-    id: string;
-    name: string;
-    url: string;
-    category: 'notices' | 'rules' | 'documents' | 'minutes' | 'board';
+  id: string;
+  name: string;
+  url: string;
+  category: 'notices' | 'rules' | 'documents' | 'minutes' | 'board' | 'finance';
+  storageName?: string;
+  uploadedAt?: any;
 }
 
 // API Response types
